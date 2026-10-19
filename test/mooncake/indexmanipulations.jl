@@ -26,7 +26,7 @@ eltypes = (Float64, ComplexF64)
         # repeat a couple times to get some distribution of arrows
         for _ in 1:5
             p = randindextuple(numind(A))
-            C = randn!(permute(A, p))
+            C = randn!(permute(A, p; copy = true))
             Mooncake.TestUtils.test_rule(rng, TensorKit.permute!, C, A, p, α, β; atol, rtol, mode)
             A = C
         end

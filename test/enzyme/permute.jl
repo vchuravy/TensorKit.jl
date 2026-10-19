@@ -23,7 +23,7 @@ fTβs = is_ci ? (Duplicated,) : (Duplicated, Const)
         α = randn(T)
         β = randn(T)
         p = randindextuple(numind(A))
-        C = randn!(permute(A, p))
+        C = randn!(permute(A, p; copy = true))
         @static if VERSION ≥ v"1.11.0-rc"
             for Tα in rTαs, Tβ in rTβs
                 EnzymeTestUtils.test_reverse(TensorKit.permute!, Duplicated, (C, Duplicated), (A, Duplicated), (p, Const), (α, Tα), (β, Tβ); atol, rtol, testset_name = "permute! reverse Tα: $Tα, Tβ: $Tβ")
